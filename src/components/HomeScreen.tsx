@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Button
-} from 'react-native'
+import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
+/**
+ * Home screen component.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class HomeScreen extends Component<{}, {}> {
   render () {
     return (
       <View>
         <Text style={styles.welcomeText}>Welcome!</Text>
-        <Button onPress={this.openRatingView} title={'Add Rating'}/>
-        <Button onPress={this.openAddLocationView} title={'Add Location'}/>
+        <Button onPress={this.openRatingView} title={'Add Rating'} />
+        <Button onPress={this.openAddLocationView} title={'Add Location'} />
       </View>
     )
   }
 
   openRatingView (): void {
-
+    // TODO: finish implementing.
   }
 
   openAddLocationView (): void {
-
+    // TODO: finish implementing.
   }
 }
 

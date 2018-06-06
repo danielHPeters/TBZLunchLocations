@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Button
-} from 'react-native'
+import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 import User from '../model/User'
 import ChangePassword from './ChangePassword'
 
@@ -13,6 +7,12 @@ interface UserDetailsProps {
   user: User
 }
 
+/**
+ * User profile component.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class UserDetails extends Component<UserDetailsProps, {}> {
   render () {
     return (
