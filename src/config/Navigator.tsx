@@ -17,5 +17,5 @@ export const Navigator = StackNavigator({
     Map: {screen: MapScreen}
   },
   {
-    initialRouteName: 'Map',
+    initialRouteName: 'Login',
   })

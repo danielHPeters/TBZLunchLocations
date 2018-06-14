@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button, Alert } from 'react-native'
+import { StyleSheet, View, TextInput, Button } from 'react-native'
+import Welcome from './Welcome.'
 import Login from './Login'
 
 export interface LoginScreenProps {
-  navigation
+
 }
 
 export interface LoginScreenState {
-  email: string
-  password: string
+  loggedIn: boolean
 }
 
 /**
@@ -25,44 +25,14 @@ export default class LoginScreen extends Component<LoginScreenProps, LoginScreen
   constructor (props: LoginScreenProps) {
     super(props)
     this.state = {
-      email: '',
-      password: ''
+      loggedIn: false
     }
   }
 
   render () {
-    return (
-      <View>
-        <Login/>
-      </View>
-    )
-  }
-
-  login () {
-    fetch('https://tbz-lunch-locations-webservice/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    }).then(response => response.json())
-      .then(json => {
-        // If server response message same as Data Matched
-        if (json.status === 'ok') {
-          //Then open Profile activity and send user email to profile activity.
-          this.props.navigation.navigate('Second', {email: this.state.email})
-        }
-        else {
-          Alert.alert(json)
-        }
-      }).catch((error) => {
-      console.error(error)
-    })
-
+    return this.state.loggedIn ?
+      <Welcome onLogoutPress={() => this.setState({loggedIn: false})}/> :
+      <Login onLoginPress={() => this.setState({loggedIn: true})} />
   }
 }
 
