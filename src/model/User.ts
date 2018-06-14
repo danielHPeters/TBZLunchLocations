@@ -7,7 +7,7 @@ import Entity from './Entity'
  * @version 1.0
  */
 export default class User extends Entity {
-  username: string
+  name: string
   lastName: string
   firstName: string
   email: string
@@ -25,7 +25,7 @@ export default class User extends Entity {
    */
   constructor (id: string, username: string, lastName: string, firstName: string, email: string, password: string) {
     super(id)
-    this.username = username
+    this.name = username
     this.lastName = lastName
     this.firstName = firstName
     this.email = email

@@ -1,7 +1,8 @@
-import { TabNavigator } from 'react-navigation'
+import { StackNavigator, TabNavigator } from 'react-navigation'
 import HomeScreen from '../components/HomeScreen'
 import ProfileScreen from '../components/ProfileScreen'
 import MapScreen from '../components/MapScreen'
+import LoginScreen from '../components/LoginScreen'
 
 /**
  * Screen navigator object.
@@ -9,8 +10,12 @@ import MapScreen from '../components/MapScreen'
  * @author Daniel Peters
  * @version 1.0
  */
-export const Navigator = TabNavigator({
-  Home: { screen: HomeScreen },
-  Profile: { screen: ProfileScreen },
-  Map: { screen: MapScreen }
-})
+export const Navigator = StackNavigator({
+    Login: {screen: LoginScreen},
+    Home: {screen: HomeScreen},
+    Profile: {screen: ProfileScreen},
+    Map: {screen: MapScreen}
+  },
+  {
+    initialRouteName: 'Map',
+  })

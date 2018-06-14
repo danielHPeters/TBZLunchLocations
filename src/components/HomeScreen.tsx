@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
+export interface HomeScreenProps {
+}
+
+export  interface HomeScreenState {
+}
+
 /**
  * Home screen component.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class HomeScreen extends Component<{}, {}> {
+export default class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
+  static navigationOtions = {
+    title: 'Home'
+  }
+
   render () {
     return (
       <View>

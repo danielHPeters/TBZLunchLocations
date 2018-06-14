@@ -17,7 +17,7 @@ export default class UserDetails extends Component<UserDetailsProps, {}> {
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{this.props.user.username}</Text>
+        <Text style={styles.title}>{this.props.user.name}</Text>
         <Text style={styles.text}>{'Last name: ' + this.props.user.lastName}</Text>
         <Text style={styles.text}>{'First name: ' + this.props.user.firstName}</Text>
         <Text style={styles.text}>{'Email: ' + this.props.user.email}</Text>

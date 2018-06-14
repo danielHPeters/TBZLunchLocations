@@ -10,6 +10,9 @@ import UserDetails from './UserDetails'
  * @version 1.0
  */
 export default class ProfileScreen extends Component<{}, {}> {
+  static navigationOptions  = {
+    title: 'Profile'
+  }
   render () {
     const daniel = new User('af32424123', 'Dankster', 'Peters', 'Daniel', 'daniel.peters@mail.com', 'test123')
     return <UserDetails user={daniel}/>
