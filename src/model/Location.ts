@@ -7,8 +7,8 @@ import Entity from './Entity'
  * @version 1.0
  */
 export default class Location extends Entity {
-  x: string
-  y: string
+  lat: number
+  lng: number
   name: string
 
   /**
@@ -19,10 +19,10 @@ export default class Location extends Entity {
    * @param y Location y coordinate
    * @param name Location name
    */
-  constructor (id: string, x: string, y: string, name: string) {
+  constructor (id: string, x: number, y: number, name: string) {
     super(id)
-    this.x = x
-    this.y = y
+    this.lat = x
+    this.lng = y
     this.name = name
   }
 }
