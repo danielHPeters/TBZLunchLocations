@@ -2,23 +2,35 @@ import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button, FlatList, ActivityIndicator } from 'react-native'
 import Rating from '../model/Rating'
 import AppConfig from '../config/AppConfig'
+import { NavigationScreenProps } from 'react-navigation'
 
 export interface RatingsListOptions {
 
 }
 
-export interface RatingsListState {
+export interface RatingsListProps extends NavigationScreenProps {
   isLoading: boolean
   dataSource: Rating[]
 }
 
-export default class RatingsListScreen extends Component<RatingsListOptions, RatingsListState> {
-  static navigationOptions = {
-    title: 'Ratings'
+export default class RatingsListScreen extends Component<RatingsListOptions, RatingsListProps> {
+  static navigationOptions = (navigation: NavigationScreenProps) => {
+    return {
+      title: navigation.navigation.getParam('title')
+    }
+  }
+
+  constructor (props: RatingsListProps) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      dataSource: [],
+      navigation: props.navigation
+    }
   }
 
   componentDidMount () {
-    return fetch(`http://${ AppConfig.API_HOST }/api/rating`, {
+    return fetch(`http://${AppConfig.API_HOST}/api/rating/location/${this.state.navigation.getParam('locationId')}`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((responseJson) => {
