@@ -1,5 +1,5 @@
 [ignore]
-; We fork some components by platform
+; We fork some component by platform
 .*/*[.]android.js
 
 ; Ignore "BUCK" generated dirs

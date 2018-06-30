@@ -10,8 +10,12 @@ import { Text, TextInput, View } from 'react-native'
 export default class ChangePassword extends Component<{}, {}> {
   render () {
     return <View>
-      <Text>Change password:</Text>
+      <Text>Current password:</Text>
       <TextInput placeholder={'Password'}/>
+      <Text>New password:</Text>
+      <TextInput placeholder={'New password'}/>
+      <Text>Repeat new password:</Text>
+      <TextInput placeholder={'New password'}/>
     </View>
   }
 }

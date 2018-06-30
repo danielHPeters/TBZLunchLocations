@@ -12,7 +12,7 @@ export default class Location extends Entity {
   name: string
 
   /**
-   * Construtor.
+   * Constructor.
    *
    * @param id Location id
    * @param x Location x coordinate

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FlatList, ActivityIndicator, Text, View } from 'react-native'
-import Location from './../model/Location'
+import Location from '../model/Location'
+import AppConfig from '../config/AppConfig'
 
 export interface LocationListProps {
 
@@ -25,7 +26,7 @@ export default class LocationListScreen extends React.Component<LocationListProp
   }
 
   componentDidMount () {
-    return fetch('http://localhost:3000/api/location', {
+    return fetch(`http://${ AppConfig.API_HOST }/api/location`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((responseJson) => {
@@ -35,7 +36,6 @@ export default class LocationListScreen extends React.Component<LocationListProp
         }, () => {
 
         })
-
       })
       .catch((error) => {
         console.error(error)

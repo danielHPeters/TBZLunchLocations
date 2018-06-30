@@ -10,7 +10,7 @@ export default class Entity {
   /**
    * Constructor. Initializes all attributes.
    *
-   * @param did Entity id
+   * @param id Entity id
    */
   constructor (id: string) {
     this.id = id

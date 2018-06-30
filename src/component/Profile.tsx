@@ -3,7 +3,7 @@ import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 import User from '../model/User'
 import ChangePassword from './ChangePassword'
 
-interface UserDetailsProps {
+interface ProfileProps {
   user: User
 }
 
@@ -13,7 +13,7 @@ interface UserDetailsProps {
  * @author Daniel Peters
  * @version 1.0
  */
-export default class UserDetails extends Component<UserDetailsProps, {}> {
+export default class Profile extends Component<ProfileProps, {}> {
   render () {
     return (
       <View style={styles.container}>

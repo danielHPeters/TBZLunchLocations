@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, TextInput, Button } from 'react-native'
-import Welcome from './Welcome.'
-import Login from './Login'
+import Welcome from '../component/Welcome.'
+import Login from '../component/Login'
 
 export interface LoginScreenProps {
 
