@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button } from 'react-native'
+import { LocationListProps } from './LocationListScreen'
+import Login from '../component/Login'
+import Profile from '../component/Profile'
+import User from '../model/User'
+import { Alert } from 'react-native'
 
-export interface HomeScreenProps {
+export interface HomeScreenProps extends LocationListProps {
 }
 
-export  interface HomeScreenState {
+export interface HomeScreenState {
+  user?: User
+  loggedIn: boolean
 }
 
 /**
@@ -14,34 +20,21 @@ export  interface HomeScreenState {
  * @version 1.0
  */
 export default class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
-  static navigationOtions = {
+  static navigationOptions = {
     title: 'Home'
   }
 
+  constructor (props: HomeScreenProps) {
+    super(props)
+    this.state = {
+      user: undefined,
+      loggedIn: false
+    }
+  }
+
   render () {
-    return (
-      <View>
-        <Text style={styles.welcomeText}>Welcome!</Text>
-        <Button onPress={this.openRatingView} title={'Add Rating'} />
-        <Button onPress={this.openAddLocationView} title={'Add Location'} />
-      </View>
-    )
-  }
-
-  openRatingView (): void {
-    // TODO: finish implementing.
-  }
-
-  openAddLocationView (): void {
-    // TODO: finish implementing.
+    return (this.state.loggedIn && this.state.user ) ?
+      <Profile user={this.state.user} onLogoutPress={() => this.setState({ user: undefined, loggedIn: false })}/> :
+      <Login onLoginPress={(user: User) => this.setState({ user: user, loggedIn: true })}/>
   }
 }
-
-const styles = StyleSheet.create({
-  welcomeText: {
-    textAlign: 'center',
-    marginTop: 30,
-    fontSize: 20,
-    marginBottom: 30
-  }
-})

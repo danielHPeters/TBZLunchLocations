@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { NavigationInjectedProps } from 'react-navigation'
 import { Alert, Button, TextInput, View } from 'react-native'
+import User from '../model/User'
+import AppConfig from '../config/AppConfig'
 
 export interface LoginProps {
-  onLoginPress: () => void
+  onLoginPress: (user: User) => void
 }
 
 export interface LoginState {
@@ -12,16 +13,34 @@ export interface LoginState {
 }
 
 export default class Login extends Component<LoginProps, LoginState> {
+  constructor (props: LoginProps) {
+    super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
+
   render () {
     return <View>
-      <TextInput placeholder={'Username'}/>
-      <TextInput placeholder={'Password'}/>
-      <Button onPress={this.props.onLoginPress} title="Sign in"/>
+      <TextInput
+        onChangeText={(text) => this.setState({ email: text })}
+        value={this.state.email}
+        placeholder={'Username'}
+        autoCapitalize='none'
+      />
+      <TextInput
+        onChangeText={(text) => this.setState({ password: text })}
+        value={this.state.password}
+        placeholder={'Password'}
+        autoCapitalize='none'
+      />
+      <Button onPress={() => this.login()} title="Sign in"/>
     </View>
   }
 
-  /*login () {
-    fetch('https://tbz-lunch-locations-webservice/login', {
+  login () {
+    fetch(`http://${AppConfig.API_HOST}/api/user/login`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -31,18 +50,17 @@ export default class Login extends Component<LoginProps, LoginState> {
         email: this.state.email,
         password: this.state.password
       })
-    }).then(response => response.json())
-      .then(json => {
-        // If server response message same as Data Matched
-        if (json.status === 'ok') {
-          //Then open Profile activity and send user email to profile activity.
-          this.props.navigation.navigate('Second', { email: this.state.email })
-        }
-        else {
-          Alert.alert(json)
-        }
-      }).catch((error) => {
-      console.error(error)
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      } else {
+        throw new Error('Failed to log in')
+      }
     })
-  }*/
+      .then((json) => {
+          this.props.onLoginPress(json)
+      }).catch((error: Error) => {
+      Alert.alert(error.message)
+    })
+  }
 }

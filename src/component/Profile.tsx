@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View} from 'react-native'
 import User from '../model/User'
 import ChangePassword from './ChangePassword'
+import ProfileActions from './ProfileActions'
 
-interface ProfileProps {
+export interface ProfileProps {
   user: User
+  onLogoutPress: () => void
 }
+
+export interface ProfileState {}
 
 /**
  * User profile component.
@@ -13,15 +17,16 @@ interface ProfileProps {
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Profile extends Component<ProfileProps, {}> {
+export default class Profile extends Component<ProfileProps, ProfileState> {
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{this.props.user.name}</Text>
+        <Text style={styles.title}>Welcome {this.props.user.name}!</Text>
         <Text style={styles.text}>{'Last name: ' + this.props.user.lastName}</Text>
         <Text style={styles.text}>{'First name: ' + this.props.user.firstName}</Text>
         <Text style={styles.text}>{'Email: ' + this.props.user.email}</Text>
         <ChangePassword/>
+        <ProfileActions onLogoutPress={this.props.onLogoutPress}/>
       </View>
     )
   }
