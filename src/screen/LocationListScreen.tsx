@@ -4,9 +4,7 @@ import Location from '../model/Location'
 import AppConfig from '../config/AppConfig'
 import { NavigationScreenProps } from 'react-navigation'
 
-export interface LocationListProps extends NavigationScreenProps {
-
-}
+export interface LocationListProps extends NavigationScreenProps {}
 
 export interface LocationListState {
   isLoading: boolean
@@ -14,9 +12,9 @@ export interface LocationListState {
 }
 
 export default class LocationListScreen extends React.Component<LocationListProps, LocationListState> {
-  static navigationOptions: () => ({
+  static navigationOptions = {
     title: 'Locations'
-  })
+  }
 
   constructor (props: LocationListProps) {
     super(props)
@@ -68,12 +66,15 @@ export default class LocationListScreen extends React.Component<LocationListProp
   }
 
   showLocationRatings (id: string, name: string): void {
-    this.props.navigation.navigate('RatingList', { title:  `${name} Ratings` ,locationId: id, locationName: name })
+    this.props.navigation.navigate(
+      'RatingList',
+      { title: `${name} Ratings`, locationId: id, locationName: name }
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     padding: 10
   },
