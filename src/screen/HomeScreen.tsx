@@ -34,7 +34,7 @@ export default class HomeScreen extends Component<HomeScreenProps, HomeScreenSta
 
   render () {
     return (this.state.loggedIn && this.state.user ) ?
-      <Profile user={this.state.user} onLogoutPress={() => this.setState({ user: undefined, loggedIn: false })}/> :
+      <Profile navigation={this.props.navigation} user={this.state.user} onLogoutPress={() => this.setState({ user: undefined, loggedIn: false })}/> :
       <Login onLoginPress={(user: User) => this.setState({ user: user, loggedIn: true })}/>
   }
 }

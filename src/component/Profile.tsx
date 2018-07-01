@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import User from '../model/User'
 import ChangePassword from './ChangePassword'
 import ProfileActions from './ProfileActions'
+import { NavigationScreenProps } from 'react-navigation'
 
-export interface ProfileProps {
+export interface ProfileProps extends NavigationScreenProps {
   user: User
   onLogoutPress: () => void
 }
@@ -26,7 +27,7 @@ export default class Profile extends Component<ProfileProps, ProfileState> {
         <Text style={styles.text}>{'First name: ' + this.props.user.firstName}</Text>
         <Text style={styles.text}>{'Email: ' + this.props.user.email}</Text>
         <ChangePassword/>
-        <ProfileActions onLogoutPress={this.props.onLogoutPress}/>
+        <ProfileActions navigation={this.props.navigation} onLogoutPress={this.props.onLogoutPress}/>
       </View>
     )
   }

@@ -33,7 +33,8 @@ export default class Login extends Component<LoginProps, LoginState> {
         onChangeText={(text) => this.setState({ password: text })}
         value={this.state.password}
         placeholder={'Password'}
-        autoCapitalize='none'
+        autoCapitalize={'none'}
+        secureTextEntry={true}
       />
       <Button onPress={() => this.login()} title="Sign in"/>
     </View>
@@ -54,13 +55,13 @@ export default class Login extends Component<LoginProps, LoginState> {
       if (response.status === 200) {
         return response.json()
       } else {
-        throw new Error('Failed to log in')
+        throw new Error('Make sure you entered the correct email and password.')
       }
     })
       .then((json) => {
-          this.props.onLoginPress(json)
+        this.props.onLoginPress(json)
       }).catch((error: Error) => {
-      Alert.alert(error.message)
+      Alert.alert('Authentication Error', error.message)
     })
   }
 }
