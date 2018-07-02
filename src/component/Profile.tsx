@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import User from '../model/User'
-import ChangePassword from './ChangePassword'
+import ChangePasswordScreen from '../screen/ChangePasswordScreen'
 import ProfileActions from './ProfileActions'
 import { NavigationScreenProps } from 'react-navigation'
 import { Card } from 'react-native-material-ui'
@@ -36,7 +36,6 @@ export default class Profile extends Component<ProfileProps, ProfileState> {
           navigation={this.props.navigation}
           onLogoutPress={this.props.onLogoutPress}
         />
-        <ChangePassword user={this.props.user}/>
       </View>
     )
   }

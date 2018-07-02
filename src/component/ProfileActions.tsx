@@ -20,11 +20,19 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
   render () {
     return (
       <View>
-        <Button onPress={() => this.openRatingView()} title={'My Ratings'}/>
-        <Button onPress={() => this.openAddLocationView()} title={'Location'}/>
-        <Button onPress={() => this.props.onLogoutPress()} title="Sign out"/>
+        <Button title={'Change password'} onPress={() => this.openChangePasswordView()}/>
+        <Button title={'My Ratings'} onPress={() => this.openRatingView()}/>
+        <Button title={'Locations'} onPress={() => this.openAddLocationView()}/>
+        <Button title="Sign out" onPress={() => this.props.onLogoutPress()}/>
       </View>
     )
+  }
+
+  openChangePasswordView (): void {
+    this.props.navigation.navigate('ChangePassword', {
+      title: `${this.props.user.name} - Password change`,
+      userId: this.props.user.id
+    })
   }
 
   openRatingView (): void {
@@ -35,6 +43,6 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
   }
 
   openAddLocationView (): void {
-      this.props.navigation.navigate('LocationList')
+    this.props.navigation.navigate('LocationList')
   }
 }

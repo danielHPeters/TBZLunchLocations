@@ -21,6 +21,10 @@ export interface RegisterUserScreenState {
  * @version 1.0
  */
 export default class RegisterUserScreen extends Component<RegisterUserScreenProps, RegisterUserScreenState> {
+  static navigationOptions = {
+    title: 'Register'
+  }
+
   constructor (props: RegisterUserScreenProps) {
     super(props)
     this.state = {
@@ -45,13 +49,11 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
           onChangeText={(text) => this.setState({ lastName: text })}
           value={this.state.lastName}
           placeholder={'Last name'}
-          autoCapitalize='none'
         />
         <TextInput
           onChangeText={(text) => this.setState({ firstName: text })}
           value={this.state.firstName}
           placeholder={'First name'}
-          autoCapitalize='none'
         />
         <TextInput
           onChangeText={(text) => this.setState({ email: text })}
@@ -92,14 +94,14 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
       if (response.status === 200) {
         return response.json()
       } else {
-        throw new Error('An unexpected error occurred.')
+        throw new Error('Could not create user. Maybe a user was created with the same email.')
       }
     })
       .then((json) => {
         Alert.alert(
           'Success',
           'You successfully registered!',
-          [{text: 'Ok', onPress: () => this.props.navigation.navigate('Home', {response: json})}]
+          [{ text: 'Ok', onPress: () => this.props.navigation.navigate('Home', { response: json }) }]
         )
       }).catch((error: Error) => {
       Alert.alert('Register Error', error.message)

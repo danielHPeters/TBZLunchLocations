@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Animated, Text } from 'react-native'
-import View = Animated.View
 import { Button } from 'react-native-material-ui'
-import Location from '../model/Location'
 import { NavigationScreenProps } from 'react-navigation'
+import { View } from 'react-native'
 
 export interface LocationDetailsScreenProps extends NavigationScreenProps {}
 
@@ -15,6 +13,7 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
       title: navigation.navigation.getParam('title')
     }
   }
+
   render () {
     return (
       <View>

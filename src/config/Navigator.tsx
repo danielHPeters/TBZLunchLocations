@@ -7,6 +7,7 @@ import LocationDetailsScreen from '../screen/LocationDetailsScreen'
 import AddLocationScreen from '../screen/AddLocationScreen'
 import AddRatingScreen from '../screen/AddRatingScreen'
 import RegisterUserScreen from '../screen/RegisterUserScreen'
+import ChangePasswordScreen from '../screen/ChangePasswordScreen'
 
 /**
  * Screen navigator object.
@@ -23,7 +24,8 @@ export const Navigator = StackNavigator(
     AddLocation: { screen: AddLocationScreen },
     LocationList: { screen: LocationListScreen },
     RatingList: { screen: RatingsListScreen },
-    AddRating: { screen: AddRatingScreen }
+    AddRating: { screen: AddRatingScreen },
+    ChangePassword: { screen: ChangePasswordScreen }
   },
   {
     initialRouteName: 'Home',
