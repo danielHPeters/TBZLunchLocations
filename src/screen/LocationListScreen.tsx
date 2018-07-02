@@ -78,7 +78,7 @@ export default class LocationListScreen extends React.Component<LocationListProp
   showLocationRatings (id: string, name: string): void {
     this.props.navigation.navigate(
       'RatingList',
-      { title: `${name} Ratings`, locationId: id, locationName: name }
+      { title: `${name} Ratings`, ownerId: id, type: 'location' }
     )
   }
 }

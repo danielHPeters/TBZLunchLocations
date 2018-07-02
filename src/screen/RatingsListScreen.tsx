@@ -38,7 +38,7 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
    * @returns
    */
   componentDidMount (): Promise<void> {
-    return fetch(`http://${AppConfig.API_HOST}/api/rating/location/${this.props.navigation.getParam('locationId')}`, {
+    return fetch(`http://${AppConfig.API_HOST}/api/rating/${this.props.navigation.getParam('type')}/${this.props.navigation.getParam('ownerId')}`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((responseJson) => {

@@ -1,8 +1,10 @@
 import { Button, View } from 'react-native'
 import React, { Component } from 'react'
 import { NavigationScreenProps } from 'react-navigation'
+import User from '../model/User'
 
 export interface ProfileActionsProps extends NavigationScreenProps {
+  user: User
   onLogoutPress: () => void
 }
 
@@ -26,7 +28,10 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
   }
 
   openRatingView (): void {
-    // TODO: finish implementing.
+    this.props.navigation.navigate(
+      'RatingList',
+      { title: `${this.props.user.name}'s Ratings`, ownerId: this.props.user.id, type: 'user' }
+    )
   }
 
   openAddLocationView (): void {

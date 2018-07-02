@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { TextInput, View } from 'react-native'
+import User from '../model/User'
 
-export interface ChangePasswordProps {}
+export interface ChangePasswordProps {
+  user: User
+}
 export interface ChangePasswordState {}
 
 /**

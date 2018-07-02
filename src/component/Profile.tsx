@@ -26,8 +26,12 @@ export default class Profile extends Component<ProfileProps, ProfileState> {
         <Text style={styles.text}>{'Last name: ' + this.props.user.lastName}</Text>
         <Text style={styles.text}>{'First name: ' + this.props.user.firstName}</Text>
         <Text style={styles.text}>{'Email: ' + this.props.user.email}</Text>
-        <ChangePassword/>
-        <ProfileActions navigation={this.props.navigation} onLogoutPress={this.props.onLogoutPress}/>
+        <ChangePassword user={this.props.user}/>
+        <ProfileActions
+          user={this.props.user}
+          navigation={this.props.navigation}
+          onLogoutPress={this.props.onLogoutPress}
+        />
       </View>
     )
   }
