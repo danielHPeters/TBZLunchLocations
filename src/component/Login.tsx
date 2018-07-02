@@ -12,6 +12,12 @@ export interface LoginState {
   password: string
 }
 
+/**
+ * Login page component. Displayed when the user is not logged in.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class Login extends Component<LoginProps, LoginState> {
   constructor (props: LoginProps) {
     super(props)
@@ -40,7 +46,10 @@ export default class Login extends Component<LoginProps, LoginState> {
     </View>
   }
 
-  login () {
+  /**
+   * Sends login request to API server.
+   */
+  login (): void {
     fetch(`http://${AppConfig.API_HOST}/api/user/login`, {
       method: 'POST',
       headers: {

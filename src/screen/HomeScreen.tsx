@@ -3,7 +3,6 @@ import { LocationListProps } from './LocationListScreen'
 import Login from '../component/Login'
 import Profile from '../component/Profile'
 import User from '../model/User'
-import { Alert } from 'react-native'
 
 export interface HomeScreenProps extends LocationListProps {
 }

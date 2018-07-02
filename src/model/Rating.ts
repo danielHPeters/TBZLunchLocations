@@ -1,7 +1,7 @@
 import Entity from './Entity'
 
 /**
- * User rating class.
+ * User rating entity class.
  *
  * @author Daniel Peters
  * @version 1.0

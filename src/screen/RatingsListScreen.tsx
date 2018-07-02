@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native'
 import Rating from '../model/Rating'
 import AppConfig from '../config/AppConfig'
 import { NavigationScreenProps } from 'react-navigation'
@@ -11,6 +11,12 @@ export interface RatingsListState {
   dataSource: Rating[]
 }
 
+/**
+ * Screen component which lists all ratings of a location.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class RatingsListScreen extends Component<RatingsListProps, RatingsListState> {
   static navigationOptions = (navigation: NavigationScreenProps) => {
     return {
@@ -26,7 +32,12 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
     }
   }
 
-  componentDidMount () {
+  /**
+   * Load the ratings of given location when the component mounted.
+   *
+   * @returns
+   */
+  componentDidMount (): Promise<void> {
     return fetch(`http://${AppConfig.API_HOST}/api/rating/location/${this.props.navigation.getParam('locationId')}`, {
       method: 'GET'
     }).then((response) => response.json())
@@ -43,7 +54,12 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
       })
   }
 
-  render () {
+  /**
+   * Component render method.
+   *
+   * @returns
+   */
+  render (): any {
     if (this.state.isLoading) {
       return (
         <View style={styles.container}>
@@ -63,6 +79,10 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
   }
 }
 
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

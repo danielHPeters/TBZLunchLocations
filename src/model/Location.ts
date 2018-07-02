@@ -1,7 +1,7 @@
 import Entity from './Entity'
 
 /**
- * Location class.
+ * Location entity class.
  *
  * @author Daniel Peters
  * @version 1.0

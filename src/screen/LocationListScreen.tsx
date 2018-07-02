@@ -24,7 +24,12 @@ export default class LocationListScreen extends React.Component<LocationListProp
     }
   }
 
-  componentDidMount () {
+  /**
+   * Load all locations when the component mounted.
+   *
+   * @returns
+   */
+  componentDidMount (): Promise<void> {
     return fetch(`http://${AppConfig.API_HOST}/api/location`, {
       method: 'GET'
     }).then((response) => response.json())
@@ -41,7 +46,12 @@ export default class LocationListScreen extends React.Component<LocationListProp
       })
   }
 
-  render () {
+  /**
+   * Component render method.
+   *
+   * @returns
+   */
+  render (): any {
     if (this.state.isLoading) {
       return (
         <View style={styles.container}>
@@ -73,6 +83,10 @@ export default class LocationListScreen extends React.Component<LocationListProp
   }
 }
 
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet} from 'react-native'
 import MapView from 'react-native-maps'
+
+export interface MapScreenProps {}
+
+export interface MapScreenState {}
 
 /**
  * Google maps screen.
@@ -8,10 +12,16 @@ import MapView from 'react-native-maps'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class MapScreen extends Component<{}, {}> {
+export default class MapScreen extends Component<MapScreenProps, MapScreenState> {
   static navigationOptions  = {
     title: 'Map'
   }
+
+  /**
+   * Component render method.
+   *
+   * @returns
+   */
   render () {
     return <MapView
       initialRegion={{
@@ -24,6 +34,10 @@ export default class MapScreen extends Component<{}, {}> {
   }
 }
 
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,

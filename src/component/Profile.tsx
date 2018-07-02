@@ -33,6 +33,10 @@ export default class Profile extends Component<ProfileProps, ProfileState> {
   }
 }
 
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
 const styles = StyleSheet.create({
   container: {
     padding: 5,
