@@ -19,6 +19,9 @@ export interface AddLocationScreenState {
  * @version 1.'0
  */
 export default class AddLocationScreen extends Component<AddLocationScreenProps, AddLocationScreenState> {
+  static navigationOptions = {
+    title: 'Add Location'
+  }
   constructor (props: AddLocationScreenProps) {
     super(props)
     this.state = {

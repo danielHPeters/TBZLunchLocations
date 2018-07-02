@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-material-ui'
 import { NavigationScreenProps } from 'react-navigation'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export interface LocationDetailsScreenProps extends NavigationScreenProps {}
 
@@ -16,8 +16,9 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <Button primary raised text={'Show Ratings'} onPress={() => this.showLocationRatings()}/>
+        <View style={styles.divider}/>
         <Button primary raised text={'Show on Map'} onPress={() => this.openMapView()}/>
       </View>
     )
@@ -27,7 +28,12 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
     const location = this.props.navigation.getParam('location')
     this.props.navigation.navigate(
       'RatingList',
-      { title: `${location.name} Ratings`, ownerId: location.id, type: 'location' }
+      {
+        title: `${location.name} Ratings`,
+        filterId: location.id,
+        type: 'location',
+        userId: this.props.navigation.getParam('userId')
+      }
     )
   }
 
@@ -39,3 +45,17 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
     )
   }
 }
+
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10
+  },
+  divider: {
+    height: 10
+  }
+})

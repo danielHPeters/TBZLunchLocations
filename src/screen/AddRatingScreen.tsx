@@ -7,15 +7,40 @@ import { NavigationScreenProps } from 'react-navigation'
 export interface AddRatingScreenProps extends NavigationScreenProps {}
 
 export interface AddRatingScreenState {
-  text: string,
-  stars: number
+  text: string
+  stars: string
 }
 
 export default class AddRatingScreen extends Component<AddRatingScreenProps, AddRatingScreenState> {
+  static navigationOptions = (navigation: NavigationScreenProps) => {
+    return {
+      title: navigation.navigation.getParam('title')
+    }
+  }
+
+  constructor (props: AddRatingScreenProps) {
+    super(props)
+    this.state = {
+      text: '',
+      stars: ''
+    }
+  }
+
   render () {
     return <View style={styles.container}>
-      <TextInput placeholder={'Rating text'}/>
-      <TextInput placeholder={'Stars'}/>
+      <TextInput
+        onChangeText={(text) => this.setState({ text: text })}
+        value={this.state.text}
+        placeholder={'Rating text'}
+        autoCapitalize='none'
+      />
+      <TextInput
+        onChangeText={(text) => this.setState({ stars: text })}
+        placeholder={'Stars'}
+        value={this.state.stars.toString()}
+        autoCapitalize='none'
+        keyboardType={'numeric'}
+      />
       <Button primary raised text={'Submit'} onPress={() => this.submitRating()}/>
     </View>
   }
@@ -29,9 +54,9 @@ export default class AddRatingScreen extends Component<AddRatingScreenProps, Add
       },
       body: JSON.stringify({
         text: this.state.text,
-        stars: this.state.stars,
+        stars: Number(this.state.stars),
         userId: this.props.navigation.getParam('userId'),
-        locationId: this.props.navigation.getParam('ratingId')
+        locationId: this.props.navigation.getParam('locationId')
       })
     }).then(response => {
       if (response.status === 200) {

@@ -69,7 +69,6 @@ export default class LocationListScreen extends React.Component<LocationListProp
             renderItem={({ item }) => this.renderItem(item)}
           />
         </ScrollView>
-        <ActionButton/>
       </View>
     )
   }
@@ -89,7 +88,7 @@ export default class LocationListScreen extends React.Component<LocationListProp
   showLocationDetails (location: Location) {
     this.props.navigation.navigate(
       'LocationDetails',
-      { title: `${location.name} Details`, location: location }
+      { title: `${location.name} Details`, location: location, userId: this.props.navigation.getParam('userId') }
     )
   }
 }

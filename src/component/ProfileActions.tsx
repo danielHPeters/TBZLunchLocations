@@ -1,4 +1,4 @@
-import { Button, View } from 'react-native'
+import { Button, View, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import User from '../model/User'
@@ -20,9 +20,13 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
   render () {
     return (
       <View>
+        <View style={styles.divider}/>
         <Button title={'Change password'} onPress={() => this.openChangePasswordView()}/>
-        <Button title={'My Ratings'} onPress={() => this.openRatingView()}/>
-        <Button title={'Locations'} onPress={() => this.openAddLocationView()}/>
+        <View style={styles.divider}/>
+        <Button title={'My Ratings'} onPress={() => this.openMyRatingsView()}/>
+        <View style={styles.divider}/>
+        <Button title={'Locations'} onPress={() => this.openLocationView()}/>
+        <View style={styles.divider}/>
         <Button title="Sign out" onPress={() => this.props.onLogoutPress()}/>
       </View>
     )
@@ -35,14 +39,29 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
     })
   }
 
-  openRatingView (): void {
+  openMyRatingsView (): void {
     this.props.navigation.navigate(
       'RatingList',
-      { title: `${this.props.user.name}'s Ratings`, ownerId: this.props.user.id, type: 'user' }
+      {
+        title: `${this.props.user.name}'s Ratings`,
+        filterId: this.props.user.id,
+        type: 'user',
+        userId: this.props.user.id
+      }
     )
   }
 
-  openAddLocationView (): void {
-    this.props.navigation.navigate('LocationList')
+  openLocationView (): void {
+    this.props.navigation.navigate('LocationList', { userId: this.props.user.id })
   }
 }
+
+/**
+ * Style definition of this component.
+ * Always put styles in StyleSheet object.
+ */
+const styles = StyleSheet.create({
+  divider: {
+    height: 10
+  }
+})

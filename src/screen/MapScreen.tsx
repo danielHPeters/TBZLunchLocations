@@ -28,8 +28,8 @@ export default class MapScreen extends Component<MapScreenProps, MapScreenState>
       initialRegion={{
         latitude: this.props.navigation.getParam('lat'),
         longitude: this.props.navigation.getParam('lng'),
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitudeDelta: 0.001844,
+        longitudeDelta: 0.000842
       }}
       style={styles.map}/>
   }

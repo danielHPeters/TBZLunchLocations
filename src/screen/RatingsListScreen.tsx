@@ -39,7 +39,7 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
    * @returns
    */
   componentDidMount (): Promise<void> {
-    return fetch(`http://${AppConfig.API_HOST}/api/rating/${this.props.navigation.getParam('type')}/${this.props.navigation.getParam('ownerId')}`, {
+    return fetch(`http://${AppConfig.API_HOST}/api/rating/${this.props.navigation.getParam('type')}/${this.props.navigation.getParam('filterId')}`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((responseJson) => {
@@ -77,7 +77,7 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
             renderItem={({ item }) => this.renderItem(item)}
           />
         </ScrollView>
-        <ActionButton/>
+        <ActionButton onPress={() => this.openAddRatingView()}/>
       </View>
     )
   }
@@ -86,11 +86,32 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
     <ListItem
       divider={true}
       centerElement={{
-        primaryText: rating.text,
+        primaryText: `${rating.text} ${this.renderStars(rating.stars)}`,
       }}
       onPress={() => this.onPressItem()}
     />
   )
+
+  renderStars(stars: number): string {
+    let starsString = ''
+    for (let i= 0; i < stars; i++) {
+      starsString += '*'
+    }
+    return starsString
+  }
+
+  openAddRatingView (): void {
+    const locationId = this.props.navigation.getParam('type') === 'location' ?
+      this.props.navigation.getParam('filterId') : ''
+
+    this.props.navigation.navigate('AddRating', {
+      title: 'Add Rating',
+      userId: this.props.navigation.getParam('userId'),
+      locationId: locationId,
+      filterId: this.props.navigation.getParam('filterId'),
+      type: this.props.navigation.getParam('type')
+    })
+  }
 
   onPressItem (): void {
 
