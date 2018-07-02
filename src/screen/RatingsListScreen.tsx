@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, FlatList, ActivityIndicator, ScrollView } from 'react-native'
 import Rating from '../model/Rating'
 import AppConfig from '../config/AppConfig'
 import { NavigationScreenProps } from 'react-navigation'
+import { ActionButton, ListItem } from 'react-native-material-ui'
 
 export interface RatingsListProps extends NavigationScreenProps {}
 
@@ -70,12 +71,29 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
 
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({ item }) => <Text style={styles.listItem}>{item.text}, {item.stars}</Text>}
-        />
+        <ScrollView>
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={({ item }) => this.renderItem(item)}
+          />
+        </ScrollView>
+        <ActionButton/>
       </View>
     )
+  }
+
+  renderItem = (rating: Rating) => (
+    <ListItem
+      divider={true}
+      centerElement={{
+        primaryText: rating.text,
+      }}
+      onPress={() => this.onPressItem()}
+    />
+  )
+
+  onPressItem (): void {
+
   }
 }
 

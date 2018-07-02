@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Alert, Button, TextInput, View } from 'react-native'
+import { Alert, TextInput, View } from 'react-native'
 import User from '../model/User'
 import AppConfig from '../config/AppConfig'
+import { Button } from 'react-native-material-ui'
 
 export interface LoginProps {
   onLoginPress: (user: User) => void
@@ -42,7 +43,8 @@ export default class Login extends Component<LoginProps, LoginState> {
         autoCapitalize={'none'}
         secureTextEntry={true}
       />
-      <Button onPress={() => this.login()} title="Sign in"/>
+      <Button raised primary text="Sign in" onPress={() => this.login()} />
+      <Button text={'Register'} onPress={() => {this.openRegisterView()}}/>
     </View>
   }
 
@@ -72,5 +74,9 @@ export default class Login extends Component<LoginProps, LoginState> {
       }).catch((error: Error) => {
       Alert.alert('Authentication Error', error.message)
     })
+  }
+
+  openRegisterView (): void {
+
   }
 }

@@ -4,6 +4,7 @@ import User from '../model/User'
 import ChangePassword from './ChangePassword'
 import ProfileActions from './ProfileActions'
 import { NavigationScreenProps } from 'react-navigation'
+import { Card } from 'react-native-material-ui'
 
 export interface ProfileProps extends NavigationScreenProps {
   user: User
@@ -23,15 +24,19 @@ export default class Profile extends Component<ProfileProps, ProfileState> {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Welcome {this.props.user.name}!</Text>
-        <Text style={styles.text}>{'Last name: ' + this.props.user.lastName}</Text>
-        <Text style={styles.text}>{'First name: ' + this.props.user.firstName}</Text>
-        <Text style={styles.text}>{'Email: ' + this.props.user.email}</Text>
-        <ChangePassword user={this.props.user}/>
+        <Card>
+          <Text style={styles.text}>
+            {`Last name: ${this.props.user.lastName}\n`}
+            {`First name: ${this.props.user.firstName}\n`}
+            {`Email: ${this.props.user.email}\n`}
+          </Text>
+        </Card>
         <ProfileActions
           user={this.props.user}
           navigation={this.props.navigation}
           onLogoutPress={this.props.onLogoutPress}
         />
+        <ChangePassword user={this.props.user}/>
       </View>
     )
   }
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   title: {
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: 'bold'
   },
   text: {

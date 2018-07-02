@@ -1,8 +1,9 @@
 import React from 'react'
-import { FlatList, ActivityIndicator, Text, View, StyleSheet } from 'react-native'
+import { FlatList, ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native'
 import Location from '../model/Location'
 import AppConfig from '../config/AppConfig'
 import { NavigationScreenProps } from 'react-navigation'
+import { ActionButton, ListItem } from 'react-native-material-ui'
 
 export interface LocationListProps extends NavigationScreenProps {}
 
@@ -62,18 +63,28 @@ export default class LocationListScreen extends React.Component<LocationListProp
 
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={
-            ({ item }) =>
-              <Text onPress={() => this.showLocationRatings(item.id, item.name)} style={styles.listItem}>
-                {item.name}
-              </Text>
-          }
-        />
+        <ScrollView>
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={({ item }) => this.renderItem(item)}
+          />
+        </ScrollView>
+        <ActionButton/>
       </View>
     )
   }
+
+  renderItem = (location: Location) => (
+    <ListItem
+      divider={true}
+      centerElement={{
+        primaryText: location.name,
+      }}
+      rightElement='arrow-forward'
+      onRightElementPress={() => this.showLocationRatings(location.id, location.name)}
+      onPress={() => this.showLocationRatings(location.id, location.name)}
+    />
+  )
 
   showLocationRatings (id: string, name: string): void {
     this.props.navigation.navigate(
