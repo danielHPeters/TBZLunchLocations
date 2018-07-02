@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import MapView from 'react-native-maps'
+import { NavigationScreenProps } from 'react-navigation'
 
-export interface MapScreenProps {}
+export interface MapScreenProps extends NavigationScreenProps {}
 
 export interface MapScreenState {}
 
@@ -13,7 +14,7 @@ export interface MapScreenState {}
  * @version 1.0
  */
 export default class MapScreen extends Component<MapScreenProps, MapScreenState> {
-  static navigationOptions  = {
+  static navigationOptions = {
     title: 'Map'
   }
 
@@ -25,12 +26,12 @@ export default class MapScreen extends Component<MapScreenProps, MapScreenState>
   render () {
     return <MapView
       initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: this.props.navigation.getParam('lat'),
+        longitude: this.props.navigation.getParam('lng'),
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       }}
-     style={styles.map}/>
+      style={styles.map}/>
   }
 }
 

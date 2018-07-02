@@ -3,8 +3,9 @@ import { Alert, TextInput, View } from 'react-native'
 import User from '../model/User'
 import AppConfig from '../config/AppConfig'
 import { Button } from 'react-native-material-ui'
+import { NavigationScreenProps } from 'react-navigation'
 
-export interface LoginProps {
+export interface LoginProps extends NavigationScreenProps {
   onLoginPress: (user: User) => void
 }
 
@@ -33,7 +34,7 @@ export default class Login extends Component<LoginProps, LoginState> {
       <TextInput
         onChangeText={(text) => this.setState({ email: text })}
         value={this.state.email}
-        placeholder={'Username'}
+        placeholder={'Email'}
         autoCapitalize='none'
       />
       <TextInput
@@ -43,7 +44,7 @@ export default class Login extends Component<LoginProps, LoginState> {
         autoCapitalize={'none'}
         secureTextEntry={true}
       />
-      <Button raised primary text="Sign in" onPress={() => this.login()} />
+      <Button raised primary text="Sign in" onPress={() => this.login()}/>
       <Button text={'Register'} onPress={() => {this.openRegisterView()}}/>
     </View>
   }
@@ -77,6 +78,6 @@ export default class Login extends Component<LoginProps, LoginState> {
   }
 
   openRegisterView (): void {
-
+    this.props.navigation.navigate('Register')
   }
 }

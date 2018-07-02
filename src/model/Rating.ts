@@ -17,7 +17,7 @@ export default class Rating extends Entity {
    * @param id Rating id
    * @param userId Owning user id
    * @param locationId Rated location
-   * @param text Rating text
+   * @param text Rating name
    * @param stars Rating stars
    */
   constructor (id: string, userId: string, locationId: string, text: string, stars: number) {

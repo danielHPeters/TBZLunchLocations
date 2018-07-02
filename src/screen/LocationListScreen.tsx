@@ -81,15 +81,15 @@ export default class LocationListScreen extends React.Component<LocationListProp
         primaryText: location.name,
       }}
       rightElement='arrow-forward'
-      onRightElementPress={() => this.showLocationRatings(location.id, location.name)}
-      onPress={() => this.showLocationRatings(location.id, location.name)}
+      onRightElementPress={() => this.showLocationDetails(location)}
+      onPress={() => this.showLocationDetails(location)}
     />
   )
 
-  showLocationRatings (id: string, name: string): void {
+  showLocationDetails (location: Location) {
     this.props.navigation.navigate(
-      'RatingList',
-      { title: `${name} Ratings`, ownerId: id, type: 'location' }
+      'LocationDetails',
+      { title: `${location.name} Details`, location: location }
     )
   }
 }

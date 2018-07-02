@@ -48,7 +48,10 @@ export default class HomeScreen extends Component<HomeScreenProps, HomeScreenSta
           loggedIn: false
         })}
       /> :
-      <Login onLoginPress={(user: User) => this.setState({ user: user, loggedIn: true })}/>
+      <Login
+        navigation={this.props.navigation}
+        onLoginPress={(user: User) => this.setState({ user: user, loggedIn: true })}
+      />
   }
 }
 
