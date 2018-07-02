@@ -15,14 +15,14 @@ export default class Location extends Entity {
    * Constructor.
    *
    * @param id Location id
-   * @param x Location x coordinate
-   * @param y Location y coordinate
+   * @param lat Location latitude
+   * @param lng Location longitude
    * @param name Location name
    */
-  constructor (id: string, x: number, y: number, name: string) {
+  constructor (id: string, lat: number, lng: number, name: string) {
     super(id)
-    this.lat = x
-    this.lng = y
+    this.lat = lat
+    this.lng = lng
     this.name = name
   }
 }

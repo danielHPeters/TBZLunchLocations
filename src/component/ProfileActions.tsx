@@ -8,6 +8,12 @@ export interface ProfileActionsProps extends NavigationScreenProps {
 
 export interface ProfileActionsState {}
 
+/**
+ * Component containing profile actions like change password etc.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class ProfileActions extends Component<ProfileActionsProps, ProfileActionsState> {
   render () {
     return (
