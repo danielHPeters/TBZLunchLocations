@@ -68,7 +68,7 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
           autoCapitalize={'none'}
           secureTextEntry={true}
         />
-        <Button raised primary text="Register" onPress={() => this.register()}/>
+        <Button raised primary text='Register' onPress={() => this.register()}/>
       </View>
     )
   }
@@ -81,7 +81,7 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: this.state.name,
@@ -103,9 +103,8 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
           'You successfully registered!',
           [{ text: 'Ok', onPress: () => this.props.navigation.navigate('Home', { response: json }) }]
         )
-      }).catch((error: Error) => {
-      Alert.alert('Register Error', error.message)
-    })
+      })
+      .catch((error: Error) => Alert.alert('Register Error', error.message))
   }
 }
 

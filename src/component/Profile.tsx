@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import User from '../model/User'
-import ChangePasswordScreen from '../screen/ChangePasswordScreen'
 import ProfileActions from './ProfileActions'
 import { NavigationScreenProps } from 'react-navigation'
 import { Card } from 'react-native-material-ui'

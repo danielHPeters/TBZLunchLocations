@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import HomeScreen from '../screen/HomeScreen'
 import MapScreen from '../screen/MapScreen'
 import LocationListScreen from '../screen/LocationListScreen'
@@ -15,7 +15,7 @@ import ChangePasswordScreen from '../screen/ChangePasswordScreen'
  * @author Daniel Peters
  * @version 1.0
  */
-export const Navigator = StackNavigator(
+export const Navigator = createStackNavigator(
   {
     Home: { screen: HomeScreen },
     Register: { screen: RegisterUserScreen },
@@ -28,6 +28,6 @@ export const Navigator = StackNavigator(
     ChangePassword: { screen: ChangePasswordScreen }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home'
   }
 )

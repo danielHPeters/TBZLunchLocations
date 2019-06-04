@@ -3,7 +3,7 @@ import { FlatList, ActivityIndicator, Text, View, StyleSheet, ScrollView } from 
 import Location from '../model/Location'
 import AppConfig from '../config/AppConfig'
 import { NavigationScreenProps } from 'react-navigation'
-import { ActionButton, ListItem } from 'react-native-material-ui'
+import { ListItem } from 'react-native-material-ui'
 
 export interface LocationListProps extends NavigationScreenProps {}
 
@@ -37,9 +37,9 @@ export default class LocationListScreen extends React.Component<LocationListProp
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          dataSource: responseJson,
+          dataSource: responseJson
         }, () => {
-
+          // Do nothing
         })
       })
       .catch((error) => {
@@ -76,9 +76,7 @@ export default class LocationListScreen extends React.Component<LocationListProp
   renderItem = (location: Location) => (
     <ListItem
       divider={true}
-      centerElement={{
-        primaryText: location.name,
-      }}
+      centerElement={{ primaryText: location.name }}
       rightElement='arrow-forward'
       onRightElementPress={() => this.showLocationDetails(location)}
       onPress={() => this.showLocationDetails(location)}

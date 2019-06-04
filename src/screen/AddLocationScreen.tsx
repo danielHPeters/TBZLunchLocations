@@ -54,7 +54,7 @@ export default class AddLocationScreen extends Component<AddLocationScreenProps,
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: this.state.name,
@@ -74,9 +74,8 @@ export default class AddLocationScreen extends Component<AddLocationScreenProps,
           'You successfully added a location!',
           [{ text: 'Ok', onPress: () => this.props.navigation.navigate('LocationList', { response: json }) }]
         )
-      }).catch((error: Error) => {
-      Alert.alert('Error', error.message)
-    })
+      })
+      .catch((error: Error) => Alert.alert('Error', error.message))
   }
 }
 

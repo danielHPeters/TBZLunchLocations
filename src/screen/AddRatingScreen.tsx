@@ -50,7 +50,7 @@ export default class AddRatingScreen extends Component<AddRatingScreenProps, Add
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         text: this.state.text,
@@ -71,9 +71,8 @@ export default class AddRatingScreen extends Component<AddRatingScreenProps, Add
           'You successfully added a rating!',
           [{ text: 'Ok', onPress: () => this.props.navigation.navigate('RatingList', { response: json }) }]
         )
-      }).catch((error: Error) => {
-      Alert.alert('Error', error.message)
-    })
+      })
+      .catch((error: Error) => Alert.alert('Error', error.message))
   }
 }
 

@@ -72,9 +72,8 @@ export default class Login extends Component<LoginProps, LoginState> {
     })
       .then((json) => {
         this.props.onLoginPress(json)
-      }).catch((error: Error) => {
-      Alert.alert('Authentication Error', error.message)
-    })
+      })
+      .catch((error: Error) => Alert.alert('Authentication Error', error.message))
   }
 
   openRegisterView (): void {

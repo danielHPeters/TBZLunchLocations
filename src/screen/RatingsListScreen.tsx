@@ -45,9 +45,9 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          dataSource: responseJson,
+          dataSource: responseJson
         }, () => {
-
+          // Do nothing
         })
       })
       .catch((error) => {
@@ -86,15 +86,15 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
     <ListItem
       divider={true}
       centerElement={{
-        primaryText: `${rating.text} ${this.renderStars(rating.stars)}`,
+        primaryText: `${rating.text} ${this.renderStars(rating.stars)}`
       }}
       onPress={() => this.onPressItem()}
     />
   )
 
-  renderStars(stars: number): string {
+  renderStars (stars: number): string {
     let starsString = ''
-    for (let i= 0; i < stars; i++) {
+    for (let i = 0; i < stars; i++) {
       starsString += '*'
     }
     return starsString
@@ -114,7 +114,7 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
   }
 
   onPressItem (): void {
-
+    // Do nothing
   }
 }
 

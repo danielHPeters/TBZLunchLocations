@@ -27,7 +27,7 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
         <View style={styles.divider}/>
         <Button title={'Locations'} onPress={() => this.openLocationView()}/>
         <View style={styles.divider}/>
-        <Button title="Sign out" onPress={() => this.props.onLogoutPress()}/>
+        <Button title='Sign out' onPress={() => this.props.onLogoutPress()}/>
       </View>
     )
   }
