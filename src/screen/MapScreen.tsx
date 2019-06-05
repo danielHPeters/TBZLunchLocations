@@ -23,15 +23,15 @@ export default class MapScreen extends Component<MapScreenProps, MapScreenState>
    *
    * @returns
    */
-  render () {
-    return <MapView
-      initialRegion={{
-        latitude: this.props.navigation.getParam('lat'),
-        longitude: this.props.navigation.getParam('lng'),
-        latitudeDelta: 0.001844,
-        longitudeDelta: 0.000842
-      }}
-      style={styles.map}/>
+  render (): JSX.Element {
+    const region = {
+      latitude: this.props.navigation.getParam('lat'),
+      longitude: this.props.navigation.getParam('lng'),
+      latitudeDelta: 0.001844,
+      longitudeDelta: 0.000842
+    }
+
+    return <MapView initialRegion={region} style={styles.map}/>
   }
 }
 

@@ -17,29 +17,41 @@ export interface ProfileActionsState {}
  * @version 1.0
  */
 export default class ProfileActions extends Component<ProfileActionsProps, ProfileActionsState> {
-  render () {
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
+  constructor (props: ProfileActionsProps) {
+    super(props)
+    this.openChangePasswordView = this.openChangePasswordView.bind(this)
+    this.openMyRatingsView = this.openMyRatingsView.bind(this)
+    this.openLocationView = this.openLocationView.bind(this)
+  }
+
+  render (): JSX.Element {
     return (
       <View>
         <View style={styles.divider}/>
-        <Button title={'Change password'} onPress={() => this.openChangePasswordView()}/>
+        <Button title={'Change password'} onPress={this.openChangePasswordView}/>
         <View style={styles.divider}/>
-        <Button title={'My Ratings'} onPress={() => this.openMyRatingsView()}/>
+        <Button title={'My Ratings'} onPress={this.openMyRatingsView}/>
         <View style={styles.divider}/>
-        <Button title={'Locations'} onPress={() => this.openLocationView()}/>
+        <Button title={'Locations'} onPress={this.openLocationView}/>
         <View style={styles.divider}/>
-        <Button title='Sign out' onPress={() => this.props.onLogoutPress()}/>
+        <Button title='Sign out' onPress={this.props.onLogoutPress}/>
       </View>
     )
   }
 
-  openChangePasswordView (): void {
+  private openChangePasswordView (): void {
     this.props.navigation.navigate('ChangePassword', {
       title: `${this.props.user.name} - Password change`,
       userId: this.props.user.id
     })
   }
 
-  openMyRatingsView (): void {
+  private openMyRatingsView (): void {
     this.props.navigation.navigate(
       'RatingList',
       {
@@ -51,7 +63,7 @@ export default class ProfileActions extends Component<ProfileActionsProps, Profi
     )
   }
 
-  openLocationView (): void {
+  private openLocationView (): void {
     this.props.navigation.navigate('LocationList', { userId: this.props.user.id })
   }
 }

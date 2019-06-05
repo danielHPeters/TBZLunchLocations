@@ -19,7 +19,7 @@ export interface ProfileState {}
  * @version 1.0
  */
 export default class Profile extends Component<ProfileProps, ProfileState> {
-  render () {
+  render (): JSX.Element {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Welcome {this.props.user.name}!</Text>

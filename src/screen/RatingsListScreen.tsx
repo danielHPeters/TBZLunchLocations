@@ -25,12 +25,19 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
     }
   }
 
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
   constructor (props: RatingsListProps) {
     super(props)
     this.state = {
       isLoading: true,
       dataSource: []
     }
+    this.openAddRatingView = this.openAddRatingView.bind(this)
+    this.onPressItem = this.onPressItem.bind(this)
   }
 
   /**
@@ -39,20 +46,15 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
    * @returns
    */
   componentDidMount (): Promise<void> {
-    return fetch(`http://${AppConfig.API_HOST}/api/rating/${this.props.navigation.getParam('type')}/${this.props.navigation.getParam('filterId')}`, {
-      method: 'GET'
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        }, () => {
-          // Do nothing
-        })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    const type = this.props.navigation.getParam('type')
+    const filterId = this.props.navigation.getParam('filterId')
+    const uri = `http://${AppConfig.API_HOST}/api/rating/${type}/${filterId}`
+    const method = 'GET'
+
+    return fetch(uri, { method: method })
+      .then((response) => response.json())
+      .then((responseJson) => this.setState({ isLoading: false, dataSource: responseJson }))
+      .catch((error) => console.error(error))
   }
 
   /**
@@ -60,49 +62,41 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
    *
    * @returns
    */
-  render (): any {
-    if (this.state.isLoading) {
-      return (
+  render (): JSX.Element {
+    return this.state.isLoading
+      ? <View style={styles.container}><ActivityIndicator/></View>
+      : (
         <View style={styles.container}>
-          <ActivityIndicator/>
+          <ScrollView>
+            <FlatList data={this.state.dataSource} renderItem={({ item }) => this.renderItem(item)}/>
+          </ScrollView>
+          <ActionButton onPress={this.openAddRatingView}/>
         </View>
       )
-    }
-
-    return (
-      <View style={styles.container}>
-        <ScrollView>
-          <FlatList
-            data={this.state.dataSource}
-            renderItem={({ item }) => this.renderItem(item)}
-          />
-        </ScrollView>
-        <ActionButton onPress={() => this.openAddRatingView()}/>
-      </View>
-    )
   }
 
-  renderItem = (rating: Rating) => (
+  private renderItem = (rating: Rating) => (
     <ListItem
       divider={true}
-      centerElement={{
-        primaryText: `${rating.text} ${this.renderStars(rating.stars)}`
-      }}
-      onPress={() => this.onPressItem()}
+      centerElement={{ primaryText: `${rating.text} ${this.renderStars(rating.stars)}` }}
+      onPress={this.onPressItem}
     />
   )
 
-  renderStars (stars: number): string {
+  private renderStars (stars: number): string {
     let starsString = ''
+
     for (let i = 0; i < stars; i++) {
       starsString += '*'
     }
+
     return starsString
   }
 
-  openAddRatingView (): void {
-    const locationId = this.props.navigation.getParam('type') === 'location' ?
-      this.props.navigation.getParam('filterId') : ''
+  private openAddRatingView (): void {
+    const locationId = this.props.navigation.getParam('type') === 'location'
+      ? this.props.navigation.getParam('filterId')
+      : ''
 
     this.props.navigation.navigate('AddRating', {
       title: 'Add Rating',
@@ -113,7 +107,7 @@ export default class RatingsListScreen extends Component<RatingsListProps, Ratin
     })
   }
 
-  onPressItem (): void {
+  private onPressItem (): void {
     // Do nothing
   }
 }

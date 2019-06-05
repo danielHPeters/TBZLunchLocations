@@ -27,6 +27,11 @@ export default class ChangePasswordScreen extends Component<ChangePasswordProps,
     }
   }
 
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
   constructor (props: ChangePasswordProps) {
     super(props)
     this.state = {
@@ -36,32 +41,34 @@ export default class ChangePasswordScreen extends Component<ChangePasswordProps,
     }
   }
 
-  render () {
-    return <View style={styles.container}>
-      <TextInput
-        onChangeText={(text) => this.setState({ password: text })}
-        value={this.state.password}
-        placeholder={'Password'}
-        autoCapitalize='none'
-        secureTextEntry={true}
-      />
+  render (): JSX.Element {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          onChangeText={(text) => this.setState({ password: text })}
+          value={this.state.password}
+          placeholder={'Password'}
+          autoCapitalize='none'
+          secureTextEntry={true}
+        />
 
-      <TextInput
-        onChangeText={(text) => this.setState({ newPassword: text })}
-        value={this.state.newPassword}
-        placeholder={'New password'}
-        autoCapitalize='none'
-        secureTextEntry={true}
-      />
-      <TextInput
-        onChangeText={(text) => this.setState({ newPasswordRepeat: text })}
-        value={this.state.newPasswordRepeat}
-        placeholder={'Repeat new password'}
-        autoCapitalize='none'
-        secureTextEntry={true}
-      />
-      <Button primary raised text={'Submit'}/>
-    </View>
+        <TextInput
+          onChangeText={(text) => this.setState({ newPassword: text })}
+          value={this.state.newPassword}
+          placeholder={'New password'}
+          autoCapitalize='none'
+          secureTextEntry={true}
+        />
+        <TextInput
+          onChangeText={(text) => this.setState({ newPasswordRepeat: text })}
+          value={this.state.newPasswordRepeat}
+          placeholder={'Repeat new password'}
+          autoCapitalize='none'
+          secureTextEntry={true}
+        />
+        <Button primary={true} raised={true} text={'Submit'}/>
+      </View>
+    )
   }
 }
 

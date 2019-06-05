@@ -7,6 +7,12 @@ export interface LocationDetailsScreenProps extends NavigationScreenProps {}
 
 export interface LocationDetailsScreenState {}
 
+/**
+ * Location detail view component.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class LocationDetailsScreen extends Component<LocationDetailsScreenProps, LocationDetailsScreenState> {
   static navigationOptions = (navigation: NavigationScreenProps) => {
     return {
@@ -14,17 +20,31 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
     }
   }
 
-  render () {
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
+  constructor (props: LocationDetailsScreenProps) {
+    super(props)
+    this.showLocationRatings = this.showLocationRatings.bind(this)
+    this.openMapView = this.openMapView.bind(this)
+  }
+
+  render (): JSX.Element {
     return (
       <View style={styles.container}>
-        <Button primary raised text={'Show Ratings'} onPress={() => this.showLocationRatings()}/>
+        <Button primary={true} raised={true} text={'Show Ratings'} onPress={this.showLocationRatings}/>
         <View style={styles.divider}/>
-        <Button primary raised text={'Show on Map'} onPress={() => this.openMapView()}/>
+        <Button primary={true} raised={true} text={'Show on Map'} onPress={this.openMapView}/>
       </View>
     )
   }
 
-  showLocationRatings (): void {
+  /**
+   * Show the Ratings of a location.
+   */
+  private showLocationRatings (): void {
     const location = this.props.navigation.getParam('location')
     this.props.navigation.navigate(
       'RatingList',
@@ -37,7 +57,10 @@ export default class LocationDetailsScreen extends Component<LocationDetailsScre
     )
   }
 
-  openMapView (): void {
+  /**
+   * Navigate to map view of location.
+   */
+  private openMapView (): void {
     const location = this.props.navigation.getParam('location')
     this.props.navigation.navigate(
       'Map',

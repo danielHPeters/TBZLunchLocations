@@ -8,20 +8,31 @@ import { ListItem } from 'react-native-material-ui'
 export interface LocationListProps extends NavigationScreenProps {}
 
 export interface LocationListState {
-  isLoading: boolean
-  dataSource: Location[]
+  loading: boolean
+  locations: Location[]
 }
 
+/**
+ * List component for locations.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class LocationListScreen extends React.Component<LocationListProps, LocationListState> {
   static navigationOptions = {
     title: 'Locations'
   }
 
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
   constructor (props: LocationListProps) {
     super(props)
     this.state = {
-      isLoading: true,
-      dataSource: []
+      loading: true,
+      locations: []
     }
   }
 
@@ -31,20 +42,13 @@ export default class LocationListScreen extends React.Component<LocationListProp
    * @returns
    */
   componentDidMount (): Promise<void> {
-    return fetch(`http://${AppConfig.API_HOST}/api/location`, {
-      method: 'GET'
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        }, () => {
-          // Do nothing
-        })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    const uri = `http://${AppConfig.API_HOST}/api/location`
+    const method = 'GET'
+
+    return fetch(uri, { method: method })
+      .then((response) => response.json())
+      .then((responseJson) => this.setState({ loading: false, locations: responseJson }))
+      .catch((error) => console.error(error))
   }
 
   /**
@@ -52,28 +56,23 @@ export default class LocationListScreen extends React.Component<LocationListProp
    *
    * @returns
    */
-  render (): any {
-    if (this.state.isLoading) {
-      return (
+  render (): JSX.Element {
+    return this.state.loading
+      ? <View style={styles.container}><ActivityIndicator/></View>
+      : (
         <View style={styles.container}>
-          <ActivityIndicator/>
+          <ScrollView>
+            <FlatList data={this.state.locations} renderItem={({ item }) => this.renderItem(item)}/>
+          </ScrollView>
         </View>
       )
-    }
-
-    return (
-      <View style={styles.container}>
-        <ScrollView>
-          <FlatList
-            data={this.state.dataSource}
-            renderItem={({ item }) => this.renderItem(item)}
-          />
-        </ScrollView>
-      </View>
-    )
   }
 
-  renderItem = (location: Location) => (
+  /**
+   * Render a single location item.
+   * @param location
+   */
+  private renderItem = (location: Location) => (
     <ListItem
       divider={true}
       centerElement={{ primaryText: location.name }}
@@ -83,7 +82,7 @@ export default class LocationListScreen extends React.Component<LocationListProp
     />
   )
 
-  showLocationDetails (location: Location) {
+  private showLocationDetails (location: Location) {
     this.props.navigation.navigate(
       'LocationDetails',
       { title: `${location.name} Details`, location: location, userId: this.props.navigation.getParam('userId') }

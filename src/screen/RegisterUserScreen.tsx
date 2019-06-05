@@ -25,6 +25,11 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
     title: 'Register'
   }
 
+  /**
+   * Constructor.
+   *
+   * @param props Props object
+   */
   constructor (props: RegisterUserScreenProps) {
     super(props)
     this.state = {
@@ -68,7 +73,7 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
           autoCapitalize={'none'}
           secureTextEntry={true}
         />
-        <Button raised primary text='Register' onPress={() => this.register()}/>
+        <Button raised={true} primary={true} text='Register' onPress={() => this.register()}/>
       </View>
     )
   }
@@ -76,32 +81,39 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
   /**
    * Sends register request to API server.
    */
-  register (): void {
-    fetch(`http://${AppConfig.API_HOST}/api/user`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        lastName: this.state.lastName,
-        firstName: this.state.firstName,
-        email: this.state.email,
-        password: this.state.password
-      })
-    }).then(response => {
-      if (response.status === 200) {
-        return response.json()
-      } else {
-        throw new Error('Could not create user. Maybe a user was created with the same email.')
-      }
+  private register (): void {
+    const uri = `http://${AppConfig.API_HOST}/api/user`
+    const method = 'POST'
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+    const body = JSON.stringify({
+      name: this.state.name,
+      lastName: this.state.lastName,
+      firstName: this.state.firstName,
+      email: this.state.email,
+      password: this.state.password
     })
+
+    fetch(uri, { method: method, headers: headers, body: body })
+      .then(response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          throw new Error('Could not create user. Maybe a user was created with the same email.')
+        }
+      })
       .then((json) => {
         Alert.alert(
           'Success',
           'You successfully registered!',
-          [{ text: 'Ok', onPress: () => this.props.navigation.navigate('Home', { response: json }) }]
+          [
+            {
+              text: 'Ok',
+              onPress: () => this.props.navigation.navigate('Home', { response: json })
+            }
+          ]
         )
       })
       .catch((error: Error) => Alert.alert('Register Error', error.message))
