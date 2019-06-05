@@ -41,7 +41,7 @@ export default class RegisterUserScreen extends Component<RegisterUserScreenProp
     }
   }
 
-  render () {
+  render (): JSX.Element {
     return (
       <View style={styles.container}>
         <TextInput
